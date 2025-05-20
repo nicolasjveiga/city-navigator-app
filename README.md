@@ -18,8 +18,8 @@
 
 ## Comandos
 
-yarn add expo
-npx expo start
+- yarn add expo
+- npx expo start
 
 ## Objetivo
 
