@@ -16,6 +16,11 @@
 - TypeScript
 - AsyncStorage (para salvar favoritos localmente)
 
+## Comandos
+
+yarn add expo
+npx expo start
+
 ## Objetivo
 
 O projeto foi desenvolvido como parte de um exercício prático para aplicar conceitos de navegação com `Stack`, `Tabs`, `Link`, rotas com parâmetros e gerenciamento de estado, além de reforçar boas práticas na organização de componentes e pastas.
