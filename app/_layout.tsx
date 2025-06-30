@@ -1,4 +1,3 @@
-// app/_layout.tsx
 import { Slot } from 'expo-router';
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import FontLoader from '@/components/FontLoader';

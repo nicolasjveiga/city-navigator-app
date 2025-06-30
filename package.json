@@ -9,9 +9,6 @@
     "web": "expo start --web",
     "test": "jest --watchAll"
   },
-  "jest": {
-    "preset": "jest-expo"
-  },
   "dependencies": {
     "@expo-google-fonts/oswald": "^0.3.0",
     "@expo/react-native-action-sheet": "^4.1.1",
@@ -36,10 +33,15 @@
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
+    "@testing-library/jest-native": "^5.4.3",
+    "@testing-library/react-native": "^13.2.0",
+    "@types/jest": "^30.0.0",
     "@types/react": "~19.0.10",
-    "jest": "^29.2.1",
+    "jest": "^29.7.0",
     "jest-expo": "~53.0.5",
+    "maestro": "^2.1.1",
     "react-test-renderer": "19.0.0",
+    "ts-jest": "^29.4.0",
     "typescript": "~5.8.3"
   },
   "private": true,

@@ -8,7 +8,7 @@ export default function HomeScreen() {
   const router = useRouter();
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <Header title="CityNavigator" />
       <View style={styles.inner}>
         <Text style={styles.title}>Cidades</Text>
@@ -22,7 +22,7 @@ export default function HomeScreen() {
           )}
         />
       </View>
-    </ScrollView>
+    </View>
   );
 }
 
