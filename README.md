@@ -21,6 +21,12 @@
 - yarn add expo
 - npx expo start
 
+## Qual a diferença entre Testes Unitários e Testes E2E (End to End)?
+
+**Testes Unitários** São testes que não dependem de interface gráfica e consequentemente são mais rápido, pelo fato de que são usados para verificar pequenas funcionalidades como funções, componentes e hooks isoladamente.
+
+**Testes E2E (End to End)** Diferente do teste unitário depende de intereface gráfica, pois são testes para verificar a aplicação de inicio ao fim.
+
 ## Objetivo
 
 O projeto foi desenvolvido como parte de um exercício prático para aplicar conceitos de navegação com `Stack`, `Tabs`, `Link`, rotas com parâmetros e gerenciamento de estado, além de reforçar boas práticas na organização de componentes e pastas.

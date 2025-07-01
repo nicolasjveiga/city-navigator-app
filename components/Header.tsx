@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import { useActionSheet } from '@expo/react-native-action-sheet';
 
 interface HeaderProps {
   title: string;
@@ -9,13 +10,32 @@ interface HeaderProps {
 
 export default function Header({ title, isLink }: HeaderProps) {
   const router = useRouter();
+  const { showActionSheetWithOptions } = useActionSheet();
+
+  const openMenu = () => {
+    const options = ['Favoritos', 'Perfil', 'Cancelar'];
+    const cancelButtonIndex = 2;
+
+    showActionSheetWithOptions(
+      {
+        options,
+        cancelButtonIndex,
+      },
+      (selectedIndex) => {
+        switch (selectedIndex) {
+          case 0:
+            router.push('/saved');
+            break;
+          case 1:
+            // Pode adicionar lógica de perfil no futuro
+            break;
+        }
+      }
+    );
+  };
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => router.push('/saved')}>
-        <Ionicons name="heart-outline" size={30} color="#fff" />
-      </TouchableOpacity>
-
       {isLink ? (
         <TouchableOpacity onPress={() => router.push('/')}>
           <Text style={styles.title}>{title}</Text>
@@ -24,8 +44,8 @@ export default function Header({ title, isLink }: HeaderProps) {
         <Text style={styles.title}>{title}</Text>
       )}
 
-      <TouchableOpacity>
-        <Ionicons name="person-circle-outline" size={35} color="#fff" />
+      <TouchableOpacity onPress={openMenu}>
+        <Ionicons name="menu-outline" size={32} color="#fff" />
       </TouchableOpacity>
     </View>
   );
@@ -38,11 +58,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#00b894',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
   },
   title: {
     color: '#fff',
-    fontSize: 30,
+    fontSize: 26,
     fontFamily: 'Oswald_400Regular',
   },
 });

@@ -1,0 +1,8 @@
+appId: host.exp.exponent
+
+---
+- launchApp
+- tapOn: "New York"         # Nome de uma cidade do seu app
+- tapOn: "⋮ Mais opções"
+- tapOn: "Salvar cidade"
+- assertVisible: "Adicionado aos favoritos"

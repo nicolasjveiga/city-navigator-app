@@ -1,14 +1,16 @@
-import { ScrollView, FlatList, TouchableOpacity, StyleSheet, View, Text } from 'react-native';
+import { FlatList, TouchableOpacity, StyleSheet, View, Text } from 'react-native';
 import { useRouter } from 'expo-router';
 import { cities } from '../data/cities';
 import CityCard from '../components/CityCard';
 import Header from '@/components/Header';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 
 export default function HomeScreen() {
   const router = useRouter();
 
   return (
-    <ScrollView style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Header title="CityNavigator" />
       <View style={styles.inner}>
         <Text style={styles.title}>Cidades</Text>
@@ -20,9 +22,10 @@ export default function HomeScreen() {
               <CityCard name={item.name} country={item.country} image={item.image} />
             </TouchableOpacity>
           )}
+          showsVerticalScrollIndicator={false}
         />
       </View>
-    </ScrollView>
+    </SafeAreaView>
   );
 }
 
@@ -32,6 +35,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f3f3f3',
   },
   inner: {
+    flex: 1,
     padding: 16,
   },
   title: {
