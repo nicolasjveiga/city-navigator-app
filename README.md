@@ -1,38 +1,61 @@
-# CityNavigator
+# 🌍 CityNavigator
 
-**CityNavigator** é um aplicativo mobile desenvolvido com Expo Router (React Native) que tem como objetivo apresentar uma lista de cidades . A proposta é permitir que o usuário visualize uma página inicial com várias cidades e tenha a opção de favoritar aquelas que mais gostar.
+## 📱 Sobre o app
+O **CityNavigator** é um aplicativo móvel desenvolvido com **Expo** para as plataformas Android/iOS.  
+O objetivo do app é permitir que o usuário explore cidades ao redor do mundo, visualize detalhes turísticos e culturais, favorite cidades e faça avaliações.
 
-## Funcionalidades
+### ✨ Funcionalidades
+- [x] Listar cidades mais visitadas do mundo  
+- [x] Visualizar detalhes de uma cidade (descrição, clima, avaliações, fotos)  
+- [x] Favoritar/desfavoritar cidades  
+- [ ] Adicionar comentários e avaliações de usuários  
+- [ ] Visualizar cidades favoritas em uma aba dedicada  
+- [ ] Buscar cidades pelo nome  
+- [ ] Exibir cidades no mapa (integração com mapas)  
+- [ ] Autenticação de usuários (login/registro)  
+- [ ] Integração com API externa de clima e turismo  
 
-- **Página inicial com cidades**: Mostra uma lista de cidades com imagem, nome e país.
-- **Favoritar cidades**: É possível salvar cidades como favoritas.
-- **Visualizar detalhes**: Cada cidade possui uma tela com mais detalhes e opções de interação.
-- **Listar favoritos**: O app possui uma aba/tela dedicada para mostrar apenas as cidades que foram salvas como favoritas.
+### 🚀 Funcionalidades futuras
+- Compartilhamento de cidades favoritas  
+- Sistema de gamificação (quiz de capitais/conhecimento gerais sobre cidades)  
+- Sugestões de roteiros personalizados
+- Integração com uma API de pontos turísticos para cada cidade  
 
-## Tecnologias usadas
+---
 
-- React Native
-- Expo Router
-- TypeScript
-- AsyncStorage (para salvar favoritos localmente)
+## 🎨 Protótipos de tela
+Os protótipos foram criados no **Figma** e representam a navegação básica do app.
 
-## Comandos
+🔗 [Protótipo no Figma](https://www.figma.com/design/pv5imjCz4HVCe9PpETqg3c/city-navigator?node-id=0-1&t=TVgeemnbgcUK6loU-1) 
 
-- yarn add expo
-- npx expo start
+### Exemplos de telas
+![Tela Detalhes](https://res.cloudinary.com/dqbxxyyza/image/upload/v1757275849/imagem_2025-09-07_171047415_tgbiky.png)  
+![Tela Início](https://res.cloudinary.com/dqbxxyyza/image/upload/v1757275732/imagem_2025-09-07_170849920_u5tuj1.png)  
+![Tela Favoritos](https://res.cloudinary.com/dqbxxyyza/image/upload/v1757275764/imagem_2025-09-07_170923306_blm9vv.png)  
 
-## Qual a diferença entre Testes Unitários e Testes E2E (End to End)?
+---
 
-**Testes Unitários** São testes que não dependem de interface gráfica e consequentemente são mais rápido, pelo fato de que são usados para verificar pequenas funcionalidades como funções, componentes e hooks isoladamente.
+## 🗄️ Modelagem do banco
+O aplicativo utilizará um banco de dados para armazenar informações das cidades e interações dos usuários.
 
-**Testes E2E (End to End)** Diferente do teste unitário depende de intereface gráfica, pois são testes para verificar a aplicação de inicio ao fim.
+🔗 [Modelo do banco](https://dbdiagram.io/d/68bddd9961a46d388edaad3b)
 
-## Objetivo
+### Modelo relacional (exemplo)
+![Modelo Banco](https://res.cloudinary.com/dqbxxyyza/image/upload/v1757276019/imagem_2025-09-07_171338419_oqvbvu.png)  
 
-O projeto foi desenvolvido como parte de um exercício prático para aplicar conceitos de navegação com `Stack`, `Tabs`, `Link`, rotas com parâmetros e gerenciamento de estado, além de reforçar boas práticas na organização de componentes e pastas.
-![Imagem](https://res.cloudinary.com/dqbxxyyza/image/upload/v1747779971/Screenshot_2025-05-20_19-17-21_muxnmp.png)
-![Imagem](https://res.cloudinary.com/dqbxxyyza/image/upload/v1747779966/Screenshot_2025-05-20_19-20-49_izvbwi.png)
-![Imagem](https://res.cloudinary.com/dqbxxyyza/image/upload/v1747779966/Screenshot_2025-05-20_19-21-01_jsy11t.png)
-![Imagem](https://res.cloudinary.com/dqbxxyyza/image/upload/v1747779966/Screenshot_2025-05-20_19-21-15_mufwch.png)
-![Imagem](https://res.cloudinary.com/dqbxxyyza/image/upload/v1747779966/Screenshot_2025-05-20_19-21-47_mwj4us.png)
 
+
+---
+
+## 📅 Planejamento de Sprints
+
+| Sprint | Período | Entregas previstas |
+|--------|---------|--------------------|
+| **Sprint 1** | Semana 1 | Configuração do projeto Expo, setup do repositório GitHub, criação de componentes iniciais (CityCard, Header) |
+| **Sprint 2** | Semana 2 | Implementar listagem de cidades e tela de detalhes (descrição, imagem, avaliações, clima fixo) |
+| **Sprint 3** | Semana 3 | Implementar funcionalidade de favoritar/desfavoritar cidades e tela de favoritos |
+| **Sprint 4** | Semana 4 | Implementar sistema de comentários e avaliações de usuários |
+| **Sprint 5** | Semana 5 | Implementar busca de cidades e integração com API de clima |
+| **Sprint 6** | Semana 6 | Ajustes finais, testes e documentação completa |
+
+---
