@@ -1,15 +1,18 @@
 import { View, Text, Image, StyleSheet, FlatList, Dimensions } from 'react-native';
 import { useState } from 'react';
+import RatingStars from './RatingStars';
 
 interface CityCardProps {
   name: string;
   country: string;
   images: string[];
+  average_rating: number;
+  reviews_count?: number;
 }
 
 const { width } = Dimensions.get('window');
 
-export default function CityCard({ name, country, images }: CityCardProps) {
+export default function CityCard({ name, country, images, average_rating, reviews_count = 0 }: CityCardProps) {
   const [index, setIndex] = useState(0);
 
   const data =
@@ -54,8 +57,20 @@ export default function CityCard({ name, country, images }: CityCardProps) {
         ))}
       </View>
 
-      <Text style={styles.name}>{name}</Text>
-      <Text style={styles.country}>{country}</Text>
+      <View style={styles.row}>
+        <View style={{ flex: 1 }}>
+          <Text style={styles.name}>{name}</Text>
+          <Text style={styles.country}>{country}</Text>
+        </View>
+
+        <View style={styles.ratingBox}>
+          <RatingStars rating={average_rating} size={16} />
+          <Text style={styles.ratingText}>
+            {average_rating.toFixed(1)}
+            {reviews_count > 0 ? ` (${reviews_count})` : ""}
+          </Text>
+        </View>
+      </View>
     </View>
   );
 }
@@ -90,15 +105,28 @@ const styles = StyleSheet.create({
     marginHorizontal: 4,
   },
 
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 8,
+    paddingBottom: 10,
+  },
+
   name: {
     fontSize: 18,
     fontWeight: 'bold',
-    margin: 8,
   },
   country: {
     fontSize: 14,
     color: '#777',
-    marginHorizontal: 8,
-    marginBottom: 8,
+  },
+
+  ratingBox: {
+    alignItems: 'flex-end',
+  },
+  ratingText: {
+    fontSize: 13,
+    color: '#555',
+    marginTop: 2,
   },
 });

@@ -68,6 +68,7 @@ export default function HomeScreen() {
                 name={item.name}
                 country={item.country}
                 images={item.images}
+                average_rating={item.average_rating}
               />
             </TouchableOpacity>
           )}
