@@ -31,5 +31,13 @@ export const cities = [
         population: 2716000,
         area: 606.1,
         image: require('../assets/images/chicago.jpg'),
+    },
+    {
+        id: '4',
+        name: 'Chicago',
+        country: 'USA',
+        population: 2716000,
+        area: 606.1,
+        image: require('../assets/images/chicago.jpg'),
     }
 ]

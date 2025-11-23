@@ -1,7 +1,6 @@
 import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import * as SecureStore from 'expo-secure-store';
 
 interface HeaderProps {
   title: string;
@@ -11,26 +10,10 @@ interface HeaderProps {
 export default function Header({ title, isLink }: HeaderProps) {
   const router = useRouter();
 
-  const handleProfilePress = async () => {
-    let token: string | null = null;
-
-    if (Platform.OS !== 'web') {
-      token = await SecureStore.getItemAsync('token');
-    } else {
-      token = localStorage.getItem('token');
-    }
-
-    if (token) {
-      router.push('/profile');
-    } else {
-      router.push('/auth/login');
-    }
-  };
-
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => router.push('/saved')}>
-        <Ionicons name="menu" size={30} color="#fff" />
+        <Ionicons name="heart-outline" size={30} color="#fff" />
       </TouchableOpacity>
 
       {isLink ? (
@@ -41,7 +24,7 @@ export default function Header({ title, isLink }: HeaderProps) {
         <Text style={styles.title}>{title}</Text>
       )}
 
-      <TouchableOpacity onPress={handleProfilePress}>
+      <TouchableOpacity>
         <Ionicons name="person-circle-outline" size={35} color="#fff" />
       </TouchableOpacity>
     </View>
@@ -55,11 +38,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#00b894',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
   },
   title: {
     color: '#fff',
-    fontSize: 30,
+    fontSize: 26,
     fontFamily: 'Oswald_400Regular',
   },
 });

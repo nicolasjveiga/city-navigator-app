@@ -13,6 +13,8 @@ import { getCities, getCityPhotos } from '../api/cities';
 import Header from '@/components/Header';
 import CityCard from '../components/CityCard';
 import { City } from '../types/City';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -75,7 +77,7 @@ export default function HomeScreen() {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Header title="CityNavigator" />
 
       <View style={styles.inner}>
@@ -102,9 +104,10 @@ export default function HomeScreen() {
               />
             </TouchableOpacity>
           )}
+          showsVerticalScrollIndicator={false}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -114,6 +117,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f3f3f3',
   },
   inner: {
+    flex: 1,
     padding: 16,
   },
   title: {
