@@ -80,6 +80,7 @@ export default function SavedScreen() {
     <View style={styles.screen}>
       <Header title="CityNavigator" isLink />
 
+      <Text style={styles.title}>Favoritos</Text>
       <FlatList
         data={favorites}
         keyExtractor={(item) => String(item.id)}
@@ -117,4 +118,13 @@ const styles = StyleSheet.create({
   listContent: {
     padding: 16,
   },
+
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginVertical: 12,
+    color: "#00b894",
+  },
+
 });

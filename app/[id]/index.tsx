@@ -13,7 +13,6 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useLocalSearchParams } from "expo-router";
-import { useActionSheet } from "@expo/react-native-action-sheet";
 import { Ionicons } from '@expo/vector-icons';
 import Header from "../../components/Header";
 import RatingStars from "../../components/RatingStars";
@@ -36,7 +35,6 @@ export default function CityDetailScreen() {
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
 
-  const { showActionSheetWithOptions } = useActionSheet();
 
   useEffect(() => {
     async function load() {
@@ -112,26 +110,6 @@ export default function CityDetailScreen() {
     }
   }
 
-  function openOptions() {
-    const options = [
-      isSaved ? "Remover dos favoritos" : "Salvar cidade",
-      "Compartilhar cidade",
-      "Cancelar",
-    ];
-
-    showActionSheetWithOptions(
-      { options, cancelButtonIndex: 2 },
-      (buttonIndex) => {
-        if (buttonIndex === 0) toggleSave();
-        if (buttonIndex === 1 && city) {
-          Share.share({
-            message: `Olha essa cidade: ${city.name}, ${city.country}!`,
-          });
-        }
-      }
-    );
-  }
-
   if (loading) {
     return (
       <View style={styles.center}>
@@ -173,7 +151,6 @@ export default function CityDetailScreen() {
             )}
           </ScrollView>
 
-          {/* Botão flutuante */}
           <TouchableOpacity
             onPress={toggleSave}
             style={{
@@ -194,17 +171,20 @@ export default function CityDetailScreen() {
           </TouchableOpacity>
         </View>
 
-        <Text style={styles.title}>{city.name}</Text>
-        <Text style={styles.subtitle}>{city.country}</Text>
+        <View style={styles.headerRow}>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.title}>{city.name}</Text>
+            <Text style={styles.subtitle}>{city.country}</Text>
+          </View>
 
-        <RatingStars rating={city.average_rating} />
-        <Text style={styles.ratingText}>
-          {city.average_rating.toFixed(1)} / 5.0
-        </Text>
+          <View style={styles.ratingBox}>
+            <RatingStars rating={city.average_rating} />
+            <Text style={styles.ratingNumber}>{city.average_rating.toFixed(1)}</Text>
+          </View>
+        </View>
+
 
         <Text style={styles.description}>{city.description}</Text>
-
-        <Button title="⋮ Mais opções" onPress={openOptions} />
 
         <View style={styles.reviewContainer}>
           <Text style={styles.sectionTitle}>Deixe sua avaliação:</Text>
@@ -219,11 +199,16 @@ export default function CityDetailScreen() {
             multiline
           />
 
-          <Button
-            title={submitting ? "Enviando..." : "Enviar review"}
+          <TouchableOpacity
+            style={[styles.reviewButton, submitting && { opacity: 0.6 }]}
             onPress={submitReview}
             disabled={submitting}
-          />
+          >
+            <Text style={styles.reviewButtonText}>
+              {submitting ? "Enviando..." : "Enviar review"}
+            </Text>
+          </TouchableOpacity>
+
         </View>
 
         <Text style={styles.sectionTitle}>Reviews:</Text>
@@ -284,4 +269,37 @@ const styles = StyleSheet.create({
   },
   reviewAuthor: { fontWeight: "bold", marginBottom: 4 },
   reviewComment: { color: "#333" },
+  headerRow: {
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "space-between",
+  marginBottom: 12,
+},
+
+ratingBox: {
+  alignItems: "flex-end",
+},
+
+ratingNumber: {
+  marginTop: 2,
+  fontSize: 14,
+  fontWeight: "bold",
+  color: "#555",
+},
+
+reviewButton: {
+  backgroundColor: "#00b894",
+  paddingVertical: 12,
+  borderRadius: 8,
+  marginTop: 8,
+  marginBottom: 4,
+  alignItems: "center",
+},
+
+reviewButtonText: {
+  color: "#fff",
+  fontSize: 16,
+  fontWeight: "bold",
+},
+
 });

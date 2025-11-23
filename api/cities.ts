@@ -7,10 +7,14 @@ const api = axios.create({
   baseURL: API_BASE_URL,
 });
 
-export async function getCities() {
-  const response = await api.get("/cities");
+export async function getCities(headers?: any) {
+  const response = await api.get("/cities", {
+    headers: headers ? headers : {}
+  });
+
   return response.data.data;
 }
+
 
 export async function getCityById(id: number) {
   const response = await api.get(`/city/${id}`);

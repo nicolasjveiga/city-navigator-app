@@ -1,4 +1,12 @@
-import { FlatList, TouchableOpacity, StyleSheet, View, Text, ActivityIndicator } from 'react-native';
+import {
+  FlatList,
+  TouchableOpacity,
+  StyleSheet,
+  View,
+  Text,
+  ActivityIndicator,
+  TextInput,
+} from 'react-native';
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { getCities, getCityPhotos } from '../api/cities';
@@ -12,32 +20,51 @@ export default function HomeScreen() {
   const [cities, setCities] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function loadCities() {
-      try {
-        const data = await getCities();
+  const [search, setSearch] = useState("");
+  const [typingTimeout, setTypingTimeout] = useState<any>(null);
 
-        const enriched = await Promise.all(
-          data.map(async (city: City) => {
-            const photos = await getCityPhotos(city.id);
+  async function loadCities(query?: string) {
+    try {
+      setLoading(true);
 
-            return {
-              ...city,
-              images: photos.map((p: any) => p.image),
-            };
-          })
-        );
+      const data = await getCities(query ? { search: query } : undefined);
 
-        setCities(enriched);
-      } catch (err) {
-        console.log("Erro ao carregar cidades", err);
-      } finally {
-        setLoading(false);
-      }
+      const enriched = await Promise.all(
+        data.map(async (city: City) => {
+          const photos = await getCityPhotos(city.id);
+
+          return {
+            ...city,
+            images: photos.map((p: any) => p.image),
+          };
+        })
+      );
+
+      setCities(enriched);
+    } catch (err) {
+      console.log("Erro ao carregar cidades", err);
+    } finally {
+      setLoading(false);
     }
+  }
 
+  useEffect(() => {
     loadCities();
   }, []);
+
+  useEffect(() => {
+    if (typingTimeout) clearTimeout(typingTimeout);
+
+    const timeout = setTimeout(() => {
+      if (search.trim() === "") {
+        loadCities();
+      } else {
+        loadCities(search.trim());
+      }
+    }, 400);
+
+    setTypingTimeout(timeout);
+  }, [search]);
 
   if (loading) {
     return (
@@ -50,8 +77,17 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <Header title="CityNavigator" />
+
       <View style={styles.inner}>
         <Text style={styles.title}>Cidades</Text>
+
+        <TextInput
+          value={search}
+          onChangeText={setSearch}
+          placeholder="Buscar cidade ou país..."
+          placeholderTextColor="#888"
+          style={styles.search}
+        />
 
         <FlatList
           data={cities}
@@ -81,10 +117,25 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 12,
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginVertical: 12,
+    color: "#00b894",
   },
+
+
+  search: {
+    backgroundColor: "#fff",
+    borderColor: "#ddd",
+    borderWidth: 1,
+    borderRadius: 10,
+    padding: 12,
+    fontSize: 16,
+    marginBottom: 16,
+    outlineStyle: "none" as any,
+  },
+
   center: {
     flex: 1,
     justifyContent: "center",
