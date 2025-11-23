@@ -2,10 +2,10 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 interface RatingStarsProps {
-  rating: number; // nota atual
-  size?: number; // tamanho da estrela
-  interactive?: boolean; // se pode clicar para alterar a nota
-  setRating?: (value: number) => void; // função callback para atualizar nota
+  rating: number;
+  size?: number;
+  interactive?: boolean;
+  setRating?: (value: number) => void;
 }
 
 export default function RatingStars({
@@ -37,7 +37,6 @@ export default function RatingStars({
       </View>
     );
 
-    // Se for interativo, envolve em TouchableOpacity
     if (interactive && setRating) {
       stars.push(
         <TouchableOpacity key={i} onPress={() => setRating(i)}>

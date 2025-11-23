@@ -15,10 +15,8 @@ export default function Header({ title, isLink }: HeaderProps) {
     let token: string | null = null;
 
     if (Platform.OS !== 'web') {
-      // Mobile (iOS/Android)
       token = await SecureStore.getItemAsync('token');
     } else {
-      // Web fallback: usa localStorage ou assume não logado
       token = localStorage.getItem('token');
     }
 

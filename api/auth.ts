@@ -9,7 +9,6 @@ const api = axios.create({
   baseURL: API_BASE_URL,
 });
 
-// --- Helpers para armazenar dados ---
 async function setItem(key: string, value: string) {
   if (Platform.OS !== "web") {
     await SecureStore.setItemAsync(key, value);
