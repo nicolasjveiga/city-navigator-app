@@ -1,6 +1,7 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import * as SecureStore from 'expo-secure-store';
 
 interface HeaderProps {
   title: string;
@@ -10,10 +11,28 @@ interface HeaderProps {
 export default function Header({ title, isLink }: HeaderProps) {
   const router = useRouter();
 
+  const handleProfilePress = async () => {
+    let token: string | null = null;
+
+    if (Platform.OS !== 'web') {
+      // Mobile (iOS/Android)
+      token = await SecureStore.getItemAsync('token');
+    } else {
+      // Web fallback: usa localStorage ou assume não logado
+      token = localStorage.getItem('token');
+    }
+
+    if (token) {
+      router.push('/profile');
+    } else {
+      router.push('/auth/login');
+    }
+  };
+
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => router.push('/saved')}>
-        <Ionicons name="heart-outline" size={30} color="#fff" />
+        <Ionicons name="menu" size={30} color="#fff" />
       </TouchableOpacity>
 
       {isLink ? (
@@ -24,7 +43,7 @@ export default function Header({ title, isLink }: HeaderProps) {
         <Text style={styles.title}>{title}</Text>
       )}
 
-      <TouchableOpacity>
+      <TouchableOpacity onPress={handleProfilePress}>
         <Ionicons name="person-circle-outline" size={35} color="#fff" />
       </TouchableOpacity>
     </View>

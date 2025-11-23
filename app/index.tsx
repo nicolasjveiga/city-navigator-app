@@ -1,22 +1,16 @@
 import { FlatList, TouchableOpacity, StyleSheet, View, Text, ActivityIndicator } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { getCities } from '../api/cities';
+import { getCities, getCityPhotos } from '../api/cities';
 import Header from '@/components/Header';
 import CityCard from '../components/CityCard';
 import { City } from '../types/City';
-import axios from "axios";
 
 export default function HomeScreen() {
   const router = useRouter();
 
   const [cities, setCities] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-
-  async function getCityPhotos(id: number) {
-    const response = await axios.get(`http://localhost:8005/api/city/${id}/photos`);
-    return response.data.data;
-  }
 
   useEffect(() => {
     async function loadCities() {

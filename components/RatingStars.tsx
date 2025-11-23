@@ -1,21 +1,27 @@
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 interface RatingStarsProps {
-  rating: number;
-  size?: number;
+  rating: number; // nota atual
+  size?: number; // tamanho da estrela
+  interactive?: boolean; // se pode clicar para alterar a nota
+  setRating?: (value: number) => void; // função callback para atualizar nota
 }
 
-export default function RatingStars({ rating, size = 20 }: RatingStarsProps) {
+export default function RatingStars({
+  rating,
+  size = 20,
+  interactive = false,
+  setRating,
+}: RatingStarsProps) {
   const stars = [];
 
   for (let i = 1; i <= 5; i++) {
     const fillLevel = Math.min(Math.max(rating - (i - 1), 0), 1);
 
-    stars.push(
+    const starElement = (
       <View key={i} style={styles.starContainer}>
         <Ionicons name="star" size={size} color="#ccc" />
-
         {fillLevel > 0 && (
           <View
             style={[
@@ -30,6 +36,17 @@ export default function RatingStars({ rating, size = 20 }: RatingStarsProps) {
         )}
       </View>
     );
+
+    // Se for interativo, envolve em TouchableOpacity
+    if (interactive && setRating) {
+      stars.push(
+        <TouchableOpacity key={i} onPress={() => setRating(i)}>
+          {starElement}
+        </TouchableOpacity>
+      );
+    } else {
+      stars.push(starElement);
+    }
   }
 
   return <View style={styles.row}>{stars}</View>;
@@ -41,6 +58,7 @@ const styles = StyleSheet.create({
   },
   starContainer: {
     position: 'relative',
+    marginRight: 4,
   },
   starOverlay: {
     position: 'absolute',
