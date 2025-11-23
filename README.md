@@ -8,11 +8,11 @@ O objetivo do app é permitir que o usuário explore cidades ao redor do mundo, 
 - [x] Listar cidades mais visitadas do mundo  
 - [x] Visualizar detalhes de uma cidade (descrição, clima, avaliações, fotos)  
 - [x] Favoritar/desfavoritar cidades  
-- [ ] Adicionar comentários e avaliações de usuários  
-- [ ] Visualizar cidades favoritas em uma aba dedicada  
-- [ ] Buscar cidades pelo nome  
+- [x] Adicionar comentários e avaliações de usuários  
+- [x] Visualizar cidades favoritas em uma aba dedicada  
+- [x] Buscar cidades pelo nome  
 - [ ] Exibir cidades no mapa (integração com mapas)  
-- [ ] Autenticação de usuários (login/registro)  
+- [x] Autenticação de usuários (login/registro)  
 - [ ] Integração com API externa de clima e turismo  
 
 ### 🚀 Funcionalidades futuras
@@ -23,6 +23,23 @@ O objetivo do app é permitir que o usuário explore cidades ao redor do mundo, 
 
 ---
 
+#### ⚙️ Configuração Inicial
+1. **Crie o arquivo `.env`:**
+   ```bash
+   cp .env.example .env
+   ```
+2. ```bash
+   yarn add expo
+    ```
+3. ```bash
+   npx expo start
+   ```
+## 🔗 API Utilizada
+Este aplicativo consome a API do city-navigator-api,
+Na .env.example já está o caminho padrão dessa api
+[Repositório da API](https://github.com/nicolasjveiga/city-navigator-api) 
+
+   
 ## 🎨 Protótipos de tela
 Os protótipos foram criados no **Figma** e representam a navegação básica do app.
 
@@ -59,3 +76,8 @@ O aplicativo utilizará um banco de dados para armazenar informações das cidad
 | **Sprint 6** | Semana 6 | Ajustes finais, testes e documentação completa |
 
 ---
+
+## 🌟 Resultado Final
+![Tela Inicio](https://res.cloudinary.com/dqbxxyyza/image/upload/v1763940829/Captura_de_tela_de_2025-11-23_20-33-34_zofva8.png)
+![Tela Detalhes](https://res.cloudinary.com/dqbxxyyza/image/upload/v1763940807/Captura_de_tela_de_2025-11-23_20-33-16_ygiyu3.png)
+![Tela Favoritos](https://res.cloudinary.com/dqbxxyyza/image/upload/v1763940982/Captura_de_tela_de_2025-11-23_20-36-12_rbwapl.png)
