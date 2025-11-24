@@ -19,10 +19,13 @@ import RatingStars from "../../components/RatingStars";
 import { getCityById, getCityPhotos } from "../../api/cities";
 import { getFavorites, createFavorite, deleteFavorite } from "../../api/favorites";
 import { getCityReviews, sendReview } from "../../api/reviews";
+import { isAuthenticated } from "../../utils/auth";
+import { useRouter } from 'expo-router';
 
 export default function CityDetailScreen() {
   const raw = useLocalSearchParams();
   const id = Number(Array.isArray(raw.id) ? raw.id[0] : raw.id);
+  const router = useRouter();
 
   const [city, setCity] = useState<any>(null);
   const [photos, setPhotos] = useState<string[]>([]);
@@ -35,38 +38,56 @@ export default function CityDetailScreen() {
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
 
+useEffect(() => {
+  let isMounted = true;
 
-  useEffect(() => {
-    async function load() {
-      try {
-        setLoading(true);
-
-        const [cityData, photosData, reviewsData, favoritesData] =
-          await Promise.all([
-            getCityById(id),
-            getCityPhotos(id),
-            getCityReviews(id),
-            getFavorites(),
-          ]);
-
-        setCity(cityData);
-
-        setPhotos(photosData.map((p: any) => p.image));
-
-        setReviews(reviewsData);
-
-        const fav = favoritesData.find((f: any) => f.city?.id === id);
-        setFavoriteId(fav ? fav.id : null);
-
-      } catch (err) {
-        console.log("Erro ao carregar dados:", err);
-      } finally {
-        setLoading(false);
-      }
+  async function init() {
+    const logged = await isAuthenticated();
+    if (!logged) {
+      router.replace("/auth/login");
+      return;
     }
 
-    load();
-  }, [id]);
+    try {
+      setLoading(true);
+
+      const [cityData, photosData, reviewsData, favoritesData] =
+        await Promise.all([
+          getCityById(id),
+          getCityPhotos(id),
+          getCityReviews(id),
+          getFavorites(),
+        ]);
+
+      if (!isMounted) return;
+
+      setCity(cityData);
+      setPhotos(photosData.map((p: any) => p.image));
+      setReviews(reviewsData);
+
+      const fav = (favoritesData || []).find((f: any) => f.city?.id === id);
+      setFavoriteId(fav ? fav.id : null);
+
+    } catch (err: any) {
+      console.log("Erro ao carregar dados:", err);
+
+      const status = err?.response?.status ?? err?.status;
+      if (status === 401) {
+        router.replace("/auth/login");
+        return;
+      }
+
+      Alert.alert("Erro", "Não foi possível carregar a cidade. Tente novamente.");
+    } finally {
+      if (isMounted) setLoading(false);
+    }
+  }
+
+  init();
+
+  return () => { isMounted = false };
+}, [id]);
+
 
   const isSaved = favoriteId !== null;
 
