@@ -1,4 +1,3 @@
-// src/components/PhotoCarousel.tsx
 import React from 'react';
 import { ScrollView, Image, StyleSheet, View } from 'react-native';
 import { SPACING } from '../constants/theme';
