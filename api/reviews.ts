@@ -1,6 +1,5 @@
 import api from "./client";
 
-// Mantém nomes usados nas telas
 
 export async function getCityReviews(cityId: number) {
   const res = await api.get(`/city/${cityId}/reviews`);

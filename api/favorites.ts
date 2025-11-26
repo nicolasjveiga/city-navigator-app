@@ -1,6 +1,5 @@
 import api from "./client";
 
-// Mantém os mesmos nomes usados nas telas
 export async function getFavorites() {
   const res = await api.get("/favorites");
   return res.data.data;
