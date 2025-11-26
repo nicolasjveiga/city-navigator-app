@@ -30,6 +30,7 @@ import { COLORS, SPACING, TYPO } from '../../constants/theme';
 export default function CityDetailScreen() {
   const raw = useLocalSearchParams();
   const id = Number(Array.isArray(raw.id) ? raw.id[0] : raw.id);
+  const router = useRouter();
 
   const [city, setCity] = useState<any | null>(null);
   const [photos, setPhotos] = useState<string[]>([]);
