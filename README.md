@@ -77,6 +77,15 @@ O aplicativo utilizará um banco de dados para armazenar informações das cidad
 
 ---
 
+## Atualizações desde o último checkpoint
+
+- Implementação com API de cidades
+- Listagem de cidades com fotos e média de avaliações
+- Mais detalhes com descrição geral sobre a cidade e reviews
+- Possibilidade de fazer reviews
+- Autenticação pela própria api
+- Opção de favoritar cidades
+
 ## 🌟 Resultado Final
 ![Tela Inicio](https://res.cloudinary.com/dqbxxyyza/image/upload/v1763940829/Captura_de_tela_de_2025-11-23_20-33-34_zofva8.png)
 ![Tela Detalhes](https://res.cloudinary.com/dqbxxyyza/image/upload/v1763940807/Captura_de_tela_de_2025-11-23_20-33-16_ygiyu3.png)
