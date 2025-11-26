@@ -1,27 +1,16 @@
-import axios from "axios";
-import Constants from "expo-constants";
+import api from "./client";
 
-const API_BASE_URL = Constants?.expoConfig?.extra?.API_BASE_URL;
-
-const api = axios.create({
-  baseURL: API_BASE_URL,
-});
-
-export async function getCities(headers?: any) {
-  const response = await api.get("/cities", {
-    headers: headers ? headers : {}
-  });
-
-  return response.data.data;
+export async function getCities(params?: any) {
+  const res = await api.get("/cities", { params });
+  return res.data.data;
 }
 
-
 export async function getCityById(id: number) {
-  const response = await api.get(`/city/${id}`);
-  return response.data.data;
+  const res = await api.get(`/city/${id}`);
+  return res.data.data;
 }
 
 export async function getCityPhotos(id: number) {
-  const response = await api.get(`/city/${id}/photos`);
-  return response.data.data;
+  const res = await api.get(`/city/${id}/photos`);
+  return res.data.data;
 }
