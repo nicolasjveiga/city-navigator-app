@@ -1,15 +1,16 @@
-import api from "./auth";
+import api from "./client";
 
+// Mantém os mesmos nomes usados nas telas
 export async function getFavorites() {
-  const response = await api.get(`/favorites`);
-  return response.data.data;
+  const res = await api.get("/favorites");
+  return res.data.data;
 }
 
 export async function createFavorite(cityId: number) {
-  const response = await api.post(`/favorite`, { city_id: cityId });
-  return response.data.data;
+  const res = await api.post("/favorite", { city_id: cityId });
+  return res.data.data;
 }
 
 export async function deleteFavorite(favoriteId: number) {
-  await api.delete(`/favorite/${favoriteId}`);
+  return api.delete(`/favorite/${favoriteId}`);
 }

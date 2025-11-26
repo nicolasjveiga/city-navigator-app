@@ -1,16 +1,17 @@
-import api from "./auth";
+import api from "./client";
+
+// Mantém nomes usados nas telas
 
 export async function getCityReviews(cityId: number) {
-  const response = await api.get(`/city/${cityId}/reviews`);
-  return response.data.data;
+  const res = await api.get(`/city/${cityId}/reviews`);
+  return res.data.data;
 }
 
 export async function sendReview(cityId: number, comment: string, rating: number) {
-  const response = await api.post(`/review`, {
+  const res = await api.post("/review", {
     city_id: cityId,
     comment,
     rating,
   });
-
-  return response.data.data;
+  return res.data.data;
 }

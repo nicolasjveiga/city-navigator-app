@@ -3,7 +3,7 @@ import { useCallback, useState } from "react";
 import { View, FlatList, Text, StyleSheet, TouchableOpacity, ActivityIndicator } from "react-native";
 import Header from "../../components/Header";
 import CityCard from "../../components/CityCard";
-import api from "../../api/auth";
+import api from "../../api/client";
 import { getCityPhotos } from "../../api/cities";
 
 interface Favorite {

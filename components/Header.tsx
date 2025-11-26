@@ -1,6 +1,7 @@
-import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import { isLoggedIn } from '../api/auth';
 
 interface HeaderProps {
   title: string;
@@ -24,7 +25,12 @@ export default function Header({ title, isLink }: HeaderProps) {
         <Text style={styles.title}>{title}</Text>
       )}
 
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={async () => {
+          const logged = await isLoggedIn();
+          router.push(logged ? "/profile" : "/auth/login");
+        }}
+      >
         <Ionicons name="person-circle-outline" size={35} color="#fff" />
       </TouchableOpacity>
     </View>
